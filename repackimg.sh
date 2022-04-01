@@ -338,6 +338,7 @@ if [ -f split_img/*-sigtype ]; then
   echo " ";
   case $sigtype in
     AVBv1) java -jar "$bin/boot_signer.jar" /$avbtype unsigned-new.img "$avbkey.pk8" "$avbkey.x509."* image-new.img 2>/dev/null;;
+    AVBv2) echo "AVBv2 detected, no need to sign.";;
     BLOB)
       awk 'BEGIN { printf "-SIGNED-BY-SIGNBLOB-\00\00\00\00\00\00\00\00" }' > image-new.img;
       "$bin/$arch/blobpack" blob.tmp $blobtype unsigned-new.img >/dev/null;

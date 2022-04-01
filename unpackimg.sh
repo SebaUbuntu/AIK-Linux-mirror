@@ -191,9 +191,9 @@ case $tailtype in
   AVB*)
     echo "Signature with \"$tailtype\" type detected.";
     echo " ";
+    echo $tailtype > "$file-sigtype";
     case $tailtype in
       *v1)
-        echo $tailtype > "$file-sigtype";
         echo $tailtest | awk '{ print $4 }' > "$file-avbtype";
       ;;
     esac;
