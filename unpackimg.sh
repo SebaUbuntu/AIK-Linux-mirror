@@ -54,7 +54,7 @@ if [ ! "$local" ]; then
   cd "$aik";
 fi;
 chmod -R 755 "$bin" "$aik"/*.sh;
-chmod 644 "$bin/magic" "$bin/androidbootimg.magic" "$bin/boot_signer.jar" "$bin/avb/"* "$bin/chromeos/"*;
+chmod 644 "$bin/magic" "$bin/androidbootimg.magic" "$bin/androidsign.magic" "$bin/boot_signer.jar" "$bin/avb/"* "$bin/chromeos/"*;
 
 img="$1";
 [ -f "$cur/$1" ] && img="$cur/$1";
@@ -100,7 +100,7 @@ mkdir split_img ramdisk;
 cd split_img;
 filesize=$(wc -c < "$img");
 echo "$filesize" > "$file-origsize";
-imgtest="$(file -m "$bin/androidbootimg.magic" "$img" 2>/dev/null | cut -d: -f2-)";
+imgtest="$(file -m "$bin/androidsign.magic" "$img" 2>/dev/null | cut -d: -f2-)";
 if [ "$(echo $imgtest | awk '{ print $2 }' | cut -d, -f1)" = "signing" ]; then
   echo $imgtest | awk '{ print $1 }' > "$file-sigtype";
   sigtype=$(cat "$file-sigtype");
@@ -128,7 +128,7 @@ if [ "$(echo $imgtest | awk '{ print $2 }' | cut -d, -f1)" = "signing" ]; then
       rm -f "$file-sigtype";
     ;;
   esac;
-  img="$file";
+  [ -f "$file" ] && img="$file";
 fi;
 
 imgtest="$(file -m "$bin/androidbootimg.magic" "$img" 2>/dev/null | cut -d: -f2-)";
@@ -182,9 +182,9 @@ case $(echo $imgtest | awk '{ print $3 }') in
   ;;
 esac;
 
-tailtest="$(dd if="$img" iflag=skip_bytes skip=$(($(wc -c < "$img") - 8192)) bs=8192 count=1 2>/dev/null | file -m $bin/androidbootimg.magic - 2>/dev/null | cut -d: -f2-)";
+tailtest="$(dd if="$img" iflag=skip_bytes skip=$(($(wc -c < "$img") - 8192)) bs=8192 count=1 2>/dev/null | file -m $bin/androidsign.magic - 2>/dev/null | cut -d: -f2-)";
 case $tailtest in
-  *data) tailtest="$(tail -n50 "$img" | file -m "$bin/androidbootimg.magic" - 2>/dev/null | cut -d: -f2-)";;
+  *data) tailtest="$(tail -n50 "$img" | file -m "$bin/androidsign.magic" - 2>/dev/null | cut -d: -f2-)";;
 esac;
 tailtype="$(echo $tailtest | awk '{ print $1 }')";
 case $tailtype in

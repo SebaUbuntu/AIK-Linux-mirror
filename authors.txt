@@ -62,7 +62,7 @@ gzip, bzip2, lzop, xz;
 awk, basename, bash, cpio, cut, dd, dirname, env, file, find, grep, hexdump, java, printf, rev, sed, stat, sudo, tail, truncate, wc (Linux):
 (required system packages/commands)
 
-androidbootimg.magic:
+androidbootimg.magic, androidsign.magic:
 osm0sis @ xda-developers
 
 shell scripts:
