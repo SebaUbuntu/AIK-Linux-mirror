@@ -49,7 +49,7 @@ case $1 in
   --local) shift;;
   *) cd "$aik";;
 esac;
-chmod -R 755 "$bin" "$aik/"*.sh;
+chmod -R 755 "$bin" "$aik"/*.sh;
 chmod 644 "$bin/magic" "$bin/androidbootimg.magic" "$bin/androidsign.magic" "$bin/boot_signer.jar" "$bin/avb/"* "$bin/chromeos/"*;
 
 if [ -z "$(ls split_img/* 2>/dev/null)" -o ! -e ramdisk ]; then
