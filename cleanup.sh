@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 # AIK-Linux/cleanup: reset working directory
 # osm0sis @ xda-developers
 

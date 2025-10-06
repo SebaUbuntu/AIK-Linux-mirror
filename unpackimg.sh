@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 # AIK-Linux/unpackimg: split image and unpack ramdisk
 # osm0sis @ xda-developers
 

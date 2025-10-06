@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 # AIK-Linux/repackimg: repack ramdisk and build image
 # osm0sis @ xda-developers
 
