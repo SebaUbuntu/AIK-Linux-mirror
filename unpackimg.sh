@@ -25,6 +25,9 @@ case $(uname -s) in
   *) plat="linux";;
 esac;
 arch=$plat/`uname -m`;
+case $arch in
+macos/arm64) arch=macos/x86_64 ;; # fix for Apple Silicon
+esac
 
 aik="${BASH_SOURCE:-$0}";
 aik="$(dirname "$(readlink -f "$aik")")";
